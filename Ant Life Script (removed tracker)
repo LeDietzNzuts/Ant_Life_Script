@@ -1,0 +1,206 @@
+--Removed ScriptKiddies69 Shitty HWID Tracker. bro was a predator for making HWID Tracker for a game called 'Ants Game' Which kids plays. don't trust any script ScriptKiddies69 made.
+--Made by gaming#5933 the most shittiest coder ever
+--join butterhub btw its a cool server
+--Thank you for using
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "SPAWN TO LOAD IN THE SCRIPT!!!!", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+repeat wait() until game:IsLoaded() and game.Players and game.Players.LocalPlayer and game.Players.LocalPlayer.Character
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Antlife script", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+local mt = getrawmetatable(game)
+
+setreadonly(mt, false)
+local old = mt.__index
+
+mt.__index = function(o, k)
+ if tostring(o) == "Humanoid" and tostring(k) == "WalkSpeed" then
+     return 20 --default walkspeed
+   end
+
+ return old(o, k)
+end
+local mt = getrawmetatable(game)
+
+setreadonly(mt, false)
+local old = mt.__index
+
+mt.__index = function(o, k) 
+ if tostring(o) == "Humanoid" and tostring(k) == "JumpPower" then 
+     return 50 --default jumppower 
+   end
+
+ return old(o, k)
+end
+local function getplrname(shortName)
+   shortName = string.lower(shortName)
+   for _,Player in pairs(game.Players:GetPlayers()) do
+       local playerName = string.lower(Player.Name) and string.lower(Player.DisplayName)
+       if string.match(playerName, "^"..shortName) then
+           return Player
+       end
+   end
+end
+OrionLib:MakeNotification({
+	Name = "Thanks for using",
+	Content = "Updated in 1/8/2023",
+	Image = "rbxassetid://4483345998",
+	Time = 69
+})
+local Tab4 = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab4:AddSlider({
+	Name = "Walkspeed",
+	Min = 20,
+	Max = 500,
+	Default = 20,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Walkspeed",
+	Callback = function(Value5)
+			game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value5
+	end    
+})
+Tab4:AddSlider({
+	Name = "JumpPower",
+	Min = 50,
+	Max = 300,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Real",
+	Callback = function(Value4)
+			game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value4
+	end    
+})
+Tab4:AddButton({
+	Name = "Tp to safe spot",
+	Callback = function()
+      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-520, -198, 2915)
+  	end    
+})
+local Tab = Window:MakeTab({
+	Name = "Combat",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab:AddButton({
+	Name = "Stop the remote loops so not lag",
+	Callback = function()
+      		getgenv().loop = false;
+      		getgenv().loop2 = false;
+  	end    
+})
+Tab:AddTextbox({
+	Name = "Player to hit",
+	Default = "plr name",
+	TextDisappear = false,
+	Callback = function(v)
+		getgenv().loop = true;
+		while true do
+			wait()
+local args = {
+    [1] = "heavy",
+    [2] = game:GetService("Players")[v].Character.Humanoid
+}
+
+game:GetService("ReplicatedStorage").Remotes.Bite1:FireServer(unpack(args))
+if not getgenv().loop then break end
+end
+end	  
+})
+Tab:AddTextbox({
+	Name = "Kill aura but teleports same thing",
+	Default = "plr name",
+	TextDisappear = false,
+	Callback = function(r)
+		getgenv().loop2 = true;
+		while true do
+			wait()
+local args = {
+    [1] = "heavy",
+    [2] = getplrname(r).Character.Humanoid
+}
+
+game:GetService("ReplicatedStorage").Remotes.Bite1:FireServer(unpack(args))
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getplrname(r).Character.HumanoidRootPart.CFrame
+if not getgenv().loop2 then break end
+end
+end	  
+})
+local Tab3 = Window:MakeTab({
+	Name = "Food stuff",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab3:AddButton({
+	Name = "Tp to food larvae",
+	Callback = function()
+      		for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
+      			if v.Name == "t12" then
+      				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+				end
+			end
+  	end    
+})
+Tab3:AddToggle({
+	Name = "Auto get food as an egg",
+	Default = false,
+	Callback = function(bool)
+		getgenv().loop3 = bool 
+		while getgenv().loop3 == true do
+			wait(0.1)
+					for i,v in pairs(workspace:GetDescendants()) do
+			if v:IsA("ClickDetector") then
+				fireclickdetector(v)
+			end
+		end
+		end
+	end    
+})
+Tab3:AddToggle({
+	Name = "Auto Hit food Larvae food not the ant food",
+	Default = false,
+	Callback = function(bool1)
+		getgenv().loop4 = bool1 
+		while getgenv().loop4 == true do
+			wait(0.1)
+local args = {
+    [1] = "heavy",
+    [2] = workspace.AI.Larvae.Humanoid
+}
+
+game:GetService("ReplicatedStorage").Remotes.Bite1:FireServer(unpack(args))
+
+		end
+	end    
+})
+local Tab5 = Window:MakeTab({
+	Name = "Auto farm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+Tab5:AddToggle({
+	Name = "Autofarm Larvae food",
+	Default = false,
+	Callback = function(bool)
+				getgenv().loop5 = bool
+		while getgenv().loop5 == true do
+			wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.AI.Larvae.t12.CFrame
+local args = {
+    [1] = "heavy",
+    [2] = workspace.AI.Larvae.Humanoid
+}
+
+game:GetService("ReplicatedStorage").Remotes.Bite1:FireServer(unpack(args))
+if game.Workspace.AI:FindFirstChild("Larvae") then
+	print("exist")
+end
+end
+end
+})
